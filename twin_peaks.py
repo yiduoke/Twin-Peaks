@@ -1,5 +1,6 @@
-from flask import Flask, request, render_template_string
+from flask import Flask, request, render_template_string, send_from_directory
 from single_peak import parse_profile, check_single_peaked
+import os
 
 app = Flask(__name__)
 
@@ -13,10 +14,12 @@ HTML_TEMPLATE = """
         textarea { width: 100%; height: 150px; font-family: monospace; }
         input[type=submit] { padding: 10px 20px; margin-top: 10px; }
         .result { margin-top: 20px; font-weight: bold; }
+        img { max-width: 80%; margin-bottom: 20px; }
     </style>
 </head>
 <body>
     <h2>Check if a Profile is Single-Peaked</h2>
+    <img src="/static/welcome.jpg" alt="Welcome to Twin Peaks">
     <form method="post">
         <label for="profile">Enter preference profile (one vote per line, comma-separated):</label><br>
         <textarea name="profile" id="profile" placeholder="a,b,c\nb,c,a\nc,a,b">{{ request.form.get('profile', '') }}</textarea><br>
@@ -43,3 +46,5 @@ def index():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+# To use the welcome.jpg image, place it in a folder named 'static' in the same directory as this script.
