@@ -7,7 +7,6 @@ def parse_profile(csv_text):
     for row in reader:
         vote = [alt.strip() for alt in row if alt.strip()]
         profile.append(vote)
-    print("Parsed Voter Profile:", profile)
     return profile
 
 def find_bottom(profile, remaining):
