@@ -112,5 +112,18 @@ class TestSinglePeaked(unittest.TestCase):
         result = check_single_peaked(profile)
         self.assertEqual(result, "No")
 
+    def test_single_crossing_not_single_peaked(self):
+        csv_input = '''
+        1,2,3,4,5,6
+        6,1,2,3,4,5
+        6,5,1,2,3,4
+        6,5,4,1,2,3
+        6,5,4,3,1,2
+        6,5,4,3,2,1
+        '''
+        profile = parse_profile(csv_input)
+        result = check_single_peaked(profile)
+        self.assertEqual(result, "No")
+
 if __name__ == '__main__':
     unittest.main()
