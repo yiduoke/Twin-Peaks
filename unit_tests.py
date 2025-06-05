@@ -102,5 +102,15 @@ class TestSinglePeaked(unittest.TestCase):
         result = check_single_peaked(profile)
         self.assertIn(result, valid_axes)
 
+    def test_not_single_peaked_cycle(self):
+        csv_input = '''
+        a,b,c
+        b,c,a
+        c,a,b
+        '''
+        profile = parse_profile(csv_input)
+        result = check_single_peaked(profile)
+        self.assertEqual(result, "No")
+
 if __name__ == '__main__':
     unittest.main()
