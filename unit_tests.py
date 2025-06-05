@@ -55,5 +55,37 @@ class TestSinglePeaked(unittest.TestCase):
         result = check_single_peaked(profile)
         self.assertIn(result, valid_axes)
 
+    def test_single_peaked_valid_four_voters(self):
+        csv_input = '''
+        b,c,a,d
+        b,c,d,a
+        c,b,a,d
+        c,b,d,a
+        '''
+        valid_axes = {
+            "Axis: a < b < c < d",
+            "Axis: d < c < b < a",
+            "Axis: a < c < b < d",
+            "Axis: d < b < c < a"
+        }
+        profile = parse_profile(csv_input)
+        result = check_single_peaked(profile)
+        self.assertIn(result, valid_axes)
+
+    def test_single_peaked_all_voters_valid(self):
+        csv_input = '''
+        b,a,c,d,e
+        c,b,d,a,e
+        d,e,c,b,a
+        e,d,c,b,a
+        '''
+        valid_axes = {
+            "Axis: a < b < c < d < e",
+            "Axis: e < d < c < b < a"
+        }
+        profile = parse_profile(csv_input)
+        result = check_single_peaked(profile)
+        self.assertIn(result, valid_axes)
+
 if __name__ == '__main__':
     unittest.main()
