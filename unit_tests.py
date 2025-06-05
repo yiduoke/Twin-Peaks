@@ -87,5 +87,20 @@ class TestSinglePeaked(unittest.TestCase):
         result = check_single_peaked(profile)
         self.assertIn(result, valid_axes)
 
+    def test_single_peaked_complex_valid(self):
+        csv_input = '''
+        d,a,f,e,b,c
+        f,d,a,c,e,b
+        e,f,b,d,a,c
+        a,d,f,e,c,b
+        '''
+        valid_axes = {
+            "Axis: b < e < f < d < a < c",
+            "Axis: c < a < d < f < e < b"
+        }
+        profile = parse_profile(csv_input)
+        result = check_single_peaked(profile)
+        self.assertIn(result, valid_axes)
+
 if __name__ == '__main__':
     unittest.main()
