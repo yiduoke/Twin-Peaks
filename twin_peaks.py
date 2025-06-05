@@ -45,6 +45,5 @@ def index():
     return render_template_string(HTML_TEMPLATE, result=result)
 
 if __name__ == '__main__':
-    app.run(debug=True)
-
-# To use the welcome.jpg image, place it in a folder named 'static' in the same directory as this script.
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
