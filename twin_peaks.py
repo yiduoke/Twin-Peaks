@@ -13,22 +13,15 @@ HTML_TEMPLATE = """
         textarea { width: 100%; height: 150px; font-family: monospace; }
         input[type=submit] { padding: 10px 20px; margin-top: 10px; }
         .result { margin-top: 20px; font-weight: bold; }
-        .example { font-size: 0.9em; color: #666; margin-top: 10px; }
     </style>
 </head>
 <body>
     <h2>Check if a Profile is Single-Peaked</h2>
     <form method="post">
-        <label>Enter preference profile (one vote per line, comma-separated):</label><br>
-        <textarea name="profile">{{ request.form.get('profile', 'a,b,c\nb,c,a\nc,a,b') }}</textarea><br>
+        <label for="profile">Enter preference profile (one vote per line, comma-separated):</label><br>
+        <textarea name="profile" id="profile" placeholder="a,b,c\nb,c,a\nc,a,b">{{ request.form.get('profile', '') }}</textarea><br>
         <input type="submit" value="Check">
     </form>
-    <div class="example">
-        Example input:<br>
-        a,b,c<br>
-        b,c,a<br>
-        c,a,b
-    </div>
     {% if result %}
     <div class="result">Result: {{ result }}</div>
     {% endif %}
